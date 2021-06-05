@@ -1,3 +1,4 @@
+import config from '../config';
 import logConfig from '../config/log.config';
 
 const log4js = require('log4js');
@@ -61,6 +62,26 @@ const formatAccessLog = (ctx, resTime) => {
     logText += '*************** access log end ***************\n';
 
     return logText;
+};
+
+// 格式化请求头
+logger.formatHead = (ctx) => {
+    let str = '';
+    Object.keys(ctx.request.header).forEach((e) => {
+        str += `${e}：${ctx.request.header[e]}
+        `;
+    });
+    const err = {
+        name: ctx.body.code,
+        message: ctx.body.msg,
+        stack: `
+  header:
+        ${str} 
+  method: ${JSON.stringify(ctx.request.method)}
+  url:    ${config.api_url + ctx.request.url}
+        `,
+    };
+    return err;
 };
 
 // 格式化错误日志

@@ -6,9 +6,8 @@ const request = (conf, ctx) => {
     if (ctx === 'test') {
         headers.token = 'dWlkPTExMDkwOCZsb25naXR1ZGU9MTE5LjQyNSZsYXRpdHVkZT0zMi4xODk1OSZzaWduPUI1ODkzMzZDRTYxMDdDNEQ5Njk3RDQzN0U4MUIwODFG';
     } else {
-        headers.token = ctx.request.header;
+        headers.token = ctx.request.header.token;
     }
-
     const configSelf = Object.assign(conf, {
         baseURL: config.api_url,
         timeout: 10000,

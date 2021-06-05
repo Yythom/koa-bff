@@ -1,9 +1,9 @@
+/* eslint-disable eqeqeq */
 import Koa2 from 'koa';
 import KoaRouter from '@koa/router';
 import KoaCors from '@koa/cors';
 import KoaStatic from 'koa-static';
 import KoaBody from 'koa-body';
-
 import routers from './routers';
 
 const app = new Koa2();
@@ -19,7 +19,13 @@ app.use(async (ctx, next) => {
     try {
         await next();
         ms = new Date() - start;
-        logger.accessLog(ctx, ms);
+        console.log(ctx.body?.code);
+        if (ctx.body?.code == '0') {
+            console.log(ctx.body, 'ctx');
+            logger.accessLog(ctx, ms);
+        } else {
+            logger.errorLog(ctx, logger.formatHead(ctx), ms);
+        }
     } catch (error) {
         ms = new Date() - start;
         logger.errorLog(ctx, error, ms);
