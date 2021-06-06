@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script> -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+</head>
+
+<body>
+    <input type="file" id="fileImag" name="configFile" />
+    <button id="submit">submit</button>
+
+    <img id='up' src="http://localhost:8701/file?url=12.jpeg" alt="">
+
+
+    <script>
+        document.getElementById('submit').onclick = function () {
+            const file = document.getElementById('fileImag').files[0];
+
+            const formData = new FormData();
+            const configs = {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            };
+            formData.append("file", file);
+            // formData.append("extraInfo", extraInfo);
+
+            axios.post('http://localhost:8701/upload', formData, configs).then(res => {
+                // console.log(res.request.response);
+                console.log(res?.data[file.name]?.url);
+                document.getElementById('up').src = res?.data[file.name]?.url
+            })
+
+        }
+    </script>
+</body>
+
+
+</html>
