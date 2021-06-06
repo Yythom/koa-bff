@@ -19,9 +19,8 @@ app.use(async (ctx, next) => {
     try {
         await next();
         ms = new Date() - start;
-        console.log(ctx.body?.code);
         if (ctx.body?.code == '0') {
-            console.log(ctx.body, 'ctx');
+            // console.log(ctx.body, 'ctx');
             logger.accessLog(ctx, ms);
         } else {
             logger.errorLog(ctx, logger.formatHead(ctx), ms);

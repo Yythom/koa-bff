@@ -39,7 +39,6 @@ const formatReqLog = (req, resTime) => {
     }
     // 服务器响应时间
     logText += `response time: ${resTime}ms\n`;
-    console.log(logText);
     return logText;
 };
 

@@ -22,7 +22,6 @@ module.exports = async (ctx, next) => {
             };
         }
     } catch (err) {
-        console.log(err);
         ctx.response.status = err.response.status;
         ctx.body = {
             success: false,

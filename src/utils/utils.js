@@ -16,7 +16,7 @@ function combine(...chunks) {
                 helper(chunkIndex + 1, cur);
             }
         }
-        console.log(str);
+        // console.log(str);
     };
     helper(0, []);
     return res;
