@@ -12,7 +12,7 @@ const file = {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve('成功了');
-            }, 1000);
+            }, 300);
         });
     },
 };
