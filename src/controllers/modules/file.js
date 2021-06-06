@@ -64,7 +64,6 @@ module.exports = {
         console.log(url);
         const stream = fs.readFileSync(`${savePath}/${encodeURIComponent(url)}`);
         ctx.body = stream;
-        // ctx.body = '';
     },
 
 };
