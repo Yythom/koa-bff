@@ -12,13 +12,12 @@
     <input type="file" id="fileImag" name="configFile" />
     <button id="submit">submit</button>
 
-    <img id='up' src="http://localhost:8701/file?url=12.jpeg" alt="">
+    <img id='up' src="" alt="">
 
 
     <script>
         document.getElementById('submit').onclick = function () {
             const file = document.getElementById('fileImag').files[0];
-
             const formData = new FormData();
             const configs = {
                 headers: { 'Content-Type': 'multipart/form-data' },
@@ -31,7 +30,6 @@
                 console.log(res?.data[file.name]?.url);
                 document.getElementById('up').src = res?.data[file.name]?.url
             })
-
         }
     </script>
 </body>
