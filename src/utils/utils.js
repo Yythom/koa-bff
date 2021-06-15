@@ -1,7 +1,11 @@
+/* eslint-disable guard-for-in */
+/* eslint-disable no-plusplus */
 /* eslint-disable func-names */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable indent */
 /* eslint-disable no-restricted-syntax */
+const os = require('os');
+
 function combine(...chunks) {
     const res = [];
     const helper = function (chunkIndex, prev) {
@@ -22,6 +26,22 @@ function combine(...chunks) {
     return res;
 }
 
+// 获取ip地址
+function getIpAddress() {
+    const interfaces = os.networkInterfaces();
+    for (const dev in interfaces) {
+        const iface = interfaces[dev];
+        for (let i = 0; i < iface.length; i++) {
+            const { family, address, internal } = iface[i];
+            if (family === 'IPv4' && address !== '127.0.0.1' && !internal) {
+                return address;
+            }
+        }
+    }
+    return '';
+}
+
 export {
     combine, // 全排
+    getIpAddress,
 };

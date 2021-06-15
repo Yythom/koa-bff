@@ -5,6 +5,7 @@ const app = require('../app');
 const tools = require('../utils/tools');
 const config = require('../config/index');
 const logger = require('../logs/logs');
+const { getIpAddress } = require('../utils/utils');
 
 /**
  * Get port from environment and store in Express.
@@ -19,4 +20,5 @@ const port = tools.normalizePort(config.PORT || '8000');
 app.listen(port, host, () => {
     logger.development(`当前运行环境-->${config.NODE_ENV}`);
     logger.development(`服务正运行在 http://${host}:${port}`);
+    logger.development(`ip: http://${getIpAddress()}:${port}`);
 });

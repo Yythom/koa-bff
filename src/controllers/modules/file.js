@@ -1,7 +1,3 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable guard-for-in */
-/* eslint-disable no-plusplus */
-/* eslint-disable consistent-return */
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
@@ -9,6 +5,7 @@ import FormData from 'form-data';
 import api from '../../api/index';
 import remove from '../../utils/file/remove';
 import config from '../../config';
+import { getIpAddress } from '../../utils/utils';
 
 const savePath = path.join(__dirname, '../../../public/uploads/');
 const http = 'http://';
@@ -20,24 +17,10 @@ module.exports = {
             const filesData = {};
             Object.keys(files).forEach((key, index) => {
                 const file = files[key];
-
                 const fileName = `${file.name}`;
                 const filePath = `${savePath}${encodeURIComponent(fileName)}`;
                 const upStream = fs.createWriteStream(filePath);
                 fs.createReadStream(file.path).pipe(upStream);
-
-                function getIpAddress() {
-                    const interfaces = os.networkInterfaces();
-                    for (const dev in interfaces) {
-                        const iface = interfaces[dev];
-                        for (let i = 0; i < iface.length; i++) {
-                            const { family, address, internal } = iface[i];
-                            if (family === 'IPv4' && address !== '127.0.0.1' && !internal) {
-                                return address;
-                            }
-                        }
-                    }
-                }
                 const stream = fs.readFileSync(file.path);
                 const form = new FormData();
                 form.append('blob', stream);
@@ -52,7 +35,7 @@ module.exports = {
                 });
             });
         });
-        console.log(res.url, 'res');
+
         ctx.body = res;
     },
 
