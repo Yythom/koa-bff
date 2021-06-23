@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import os from 'os';
 import FormData from 'form-data';
+import mime from 'mime-types';
 import api from '../../api/index';
 import remove from '../../utils/file/remove';
 import config from '../../config';
@@ -61,7 +62,7 @@ module.exports = {
 
     get: async (ctx, next) => {
         const { url } = ctx.request.query;
-        // console.log(url);
+        ctx.set('Content-Type', mime.lookup(`${savePath}/${encodeURIComponent(url)}`));
         const stream = fs.readFileSync(`${savePath}/${encodeURIComponent(url)}`);
         ctx.body = stream;
     },
