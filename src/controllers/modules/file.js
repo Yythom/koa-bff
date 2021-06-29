@@ -55,6 +55,19 @@ module.exports = {
                     resolve(files.length);
                 });
             });
+            fs.readdir(path.join(__dirname, '../../../public/tmp/'), (err, files) => {
+                console.log(err, files);
+                if (err) {
+                    resolve(err);
+                }
+                if (!files[0]) {
+                    resolve(0);
+                    return;
+                }
+                remove(savePath, () => {
+                    resolve(files.length);
+                });
+            });
         });
 
         ctx.body = res;

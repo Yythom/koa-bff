@@ -1,6 +1,8 @@
 import path from 'path';
 import { pipeline } from 'stream';
 import fs, { WriteStream } from 'fs-extra';
+import { getIpAddress } from '../../utils/utils';
+import config from '../../config';
 
 const TMP_DIR = path.join(__dirname, '../../../public/tmp/');
 const http = 'http://';
@@ -83,6 +85,7 @@ module.exports = {
             ctx.body = {
                 success: true,
                 needUpload: false,
+                url: `${`${http}${getIpAddress()}:${config.PORT}`}/file?url=${encodeURIComponent(filename)}`,
             };
             return;
         }
@@ -108,7 +111,10 @@ module.exports = {
     merge: async (ctx, next) => {
         const { filename, size } = ctx.params;
         await mergeChunks(filename, +size); // 进行文件合并，size表示分片文件的大小
-        ctx.body = { success: true };
+        const url = `${`${http}${getIpAddress()}:${config.PORT}`}/file?url=${encodeURIComponent(filename)}`;
+        ctx.body = {
+            success: true,
+            url,
+        };
     },
-
 };
