@@ -25,6 +25,7 @@
     "chai": "^4.3.4",
     "es6-requireindex": "^0.3.10",
     "form-data": "^4.0.0",
+    "fs-extra": "^8.1.0",
     "koa": "^2.11.0",
     "koa-body": "^4.1.1",
     "koa-static": "^5.0.0",
