@@ -75,7 +75,6 @@ module.exports = {
         });
         ctx.req.pipe(ws);
         ctx.body = { needUpload: true };
-        // ctx.req.pipe(ws); // 通过pipe来进行写入
     },
     verify: async (ctx, next) => {
         const { filename } = ctx.params;
