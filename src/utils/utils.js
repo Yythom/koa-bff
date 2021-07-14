@@ -34,6 +34,9 @@ function getIpAddress() {
         for (let i = 0; i < iface.length; i++) {
             const { family, address, internal } = iface[i];
             if (family === 'IPv4' && address !== '127.0.0.1' && !internal) {
+                if (address.indexOf('10.') !== -1) {
+                    return '49.234.41.182';
+                }
                 return address;
             }
         }
