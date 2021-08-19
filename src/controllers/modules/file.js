@@ -1,8 +1,10 @@
 import fs from 'fs';
 import path from 'path';
+import Axios from 'axios';
 import os from 'os';
 import FormData from 'form-data';
 import mime from 'mime-types';
+import stream from 'stream';
 import api from '../../api/index';
 import remove from '../../utils/file/remove';
 import config from '../../config';
@@ -79,5 +81,26 @@ module.exports = {
         const stream = fs.readFileSync(`${savePath}/${encodeURIComponent(url)}`);
         ctx.body = stream;
     },
-
+    osspost: async (ctx, next) => {
+        const { url } = ctx.request.body;
+        const { Duplex } = stream;
+        function bufferToStream(buffer) {
+            const stream = new Duplex();
+            stream.push(buffer);
+            stream.push(null);
+            return stream;
+        }
+        const res = await Axios.get(url, { responseType: 'arraybuffer' }, {
+            headers: {
+                'Cache-Control': 'no-cache',
+            },
+        });
+        if (res) {
+            const buf = res.data;
+            // const result = bufferToStream(buf);
+            ctx.set('Content-Type', 'image/jpg');
+            const base64Str = `data:image/jpeg;base64,${buf.toString('base64')}`;
+            ctx.body = base64Str;
+        }
+    },
 };
