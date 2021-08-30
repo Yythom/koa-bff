@@ -52,6 +52,14 @@ module.exports = {
             ctx.body = { code: false, msg: '地址请求错误' };
         }
     },
-
-
+    tsLocation: async (ctx, next) => {
+        const data = ctx.request.body;
+        const url = `https://apis.map.qq.com/ws/coord/v1/translate?locations=${data.lat},${data.lng}&type=3&key=${Config.LOCATION_KEY}`;
+        const res = await Axios.get(url);
+        if (res.data.status === 0) {
+            ctx.body = { code: 0, ...res.data };
+        } else {
+            ctx.body = { code: false, msg: '地址请求错误' };
+        }
+    },
 };

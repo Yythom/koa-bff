@@ -5,4 +5,5 @@ export default (router, middleware, controller) => {
     router.post('/polyLine', controller.map.polyLine);
     router.post('/locationKeyword', controller.map.locationKeyword);
     router.post('/searchAround', controller.map.searchAround);
+    router.post('/tsLocation', controller.map.tsLocation);
 };
