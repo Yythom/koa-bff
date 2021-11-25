@@ -15,11 +15,13 @@ const http = 'http://';
 module.exports = {
     upload: async (ctx, next) => {
         const { files } = ctx.request;
-        // console.log(ctx.request.header.token);
+        if (!files) ctx.body = '上传文件不存在';
+        console.log(files, 'files');
         const res = await new Promise((resolve) => {
             const filesData = {};
             Object.keys(files).forEach((key, index) => {
                 const file = files[key];
+                if (!key) resolve('上传文件不存在');
                 const fileName = `${file.name}`;
                 const filePath = `${savePath}${encodeURIComponent(fileName)}`;
                 const upStream = fs.createWriteStream(filePath);
@@ -38,7 +40,6 @@ module.exports = {
                 });
             });
         });
-
         ctx.body = res;
     },
 
