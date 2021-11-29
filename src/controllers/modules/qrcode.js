@@ -2,6 +2,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import jimp from 'jimp';
 import QrcodeReader from 'qrcode-reader';
+import remove from '../../utils/file/remove';
 
 const decodeImage = jimp.read;
 const savePath = path.join(__dirname, '../../../public/uploads/');
@@ -11,13 +12,13 @@ const savePath = path.join(__dirname, '../../../public/uploads/');
 const qrDecode = async (data) => new Promise((resolve, reject) => {
     decodeImage(data, (err, image) => {
         if (err) {
-            resolve(false);
+            resolve(err);
             return;
         }
         const decodeQR = new QrcodeReader();
         decodeQR.callback = function (errorWhenDecodeQR, result) {
             if (errorWhenDecodeQR) {
-                resolve(false);
+                resolve('errorWhenDecodeQR');
                 return;
             }
             if (!result) {
@@ -49,6 +50,9 @@ module.exports = {
                         filesData[fileName] = code;
                         if (index === Object.keys(files).length - 1) {
                             resolve(filesData);
+                            setTimeout(() => {
+                                remove(filePath, () => { });
+                            }, 200);
                         }
                     });
                 });
