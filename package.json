@@ -23,6 +23,7 @@
     "@koa/router": "^8.0.8",
     "axios": "^0.19.2",
     "chai": "^4.3.4",
+    "crypto": "^1.0.1",
     "es6-requireindex": "^0.3.10",
     "form-data": "^4.0.0",
     "fs-extra": "^8.1.0",
