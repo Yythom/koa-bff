@@ -1,14 +1,13 @@
+/* eslint-disable camelcase */
+/* eslint-disable no-unused-expressions */
 import path from 'path';
 import { pipeline } from 'stream';
 import fs, { WriteStream } from 'fs-extra';
 import { getIpAddress } from '../../utils/utils';
 import config from '../../config';
-
-const TMP_DIR = path.join(__dirname, '../../../public/tmp/');
-const http = 'http://';
-const PUBLIC_DIR = path.join(__dirname, '../../../public/uploads/');
-// const DEFAULT_SIZE = 80 * 1024
-const DEFAULT_SIZE = 80 * 1024 * 1024;
+import {
+    DEFAULT_SIZE, PUBLIC_DIR, TMP_DIR, http,
+} from '../../utils/file/s_file';
 
 const pipeStream = (filePath, ws, options = {}, unlink = true) => new Promise((resolve, reject) => { // 通过pipeline利用stream背压机制避免阻塞、提升读写效率
     const rs = fs.createReadStream(filePath, options);

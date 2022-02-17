@@ -33,6 +33,7 @@
     "log4js": "^6.2.1",
     "mime-types": "^2.1.31",
     "mocha": "^8.4.0",
+    "node-apk": "^1.1.1",
     "qrcode-reader": "^1.0.4"
   },
   "devDependencies": {
