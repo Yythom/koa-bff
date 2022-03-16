@@ -11,6 +11,9 @@ module.exports = {
             };
             arr.push(element);
         }
-        ctx.body = JSON.stringify(arr);
+        ctx.body = JSON.stringify({
+            code: 0,
+            data: arr,
+        });
     },
 };
