@@ -15,13 +15,13 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
-var TMP_DIR = _path["default"].join(__dirname, '../../../public/tmp/');
+var TMP_DIR = _path["default"].resolve(__dirname, '../../../public/tmp/');
 
 exports.TMP_DIR = TMP_DIR;
 var http = 'http://';
 exports.http = http;
 
-var PUBLIC_DIR = _path["default"].join(__dirname, '../../../public/uploads/');
+var PUBLIC_DIR = _path["default"].resolve(__dirname, '../../../public/uploads/');
 
 exports.PUBLIC_DIR = PUBLIC_DIR;
 var DEFAULT_SIZE = 80 * 1024 * 1024;

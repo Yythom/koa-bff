@@ -10,6 +10,10 @@ import config from '../../config';
 import { getIpAddress } from '../../utils/utils';
 
 const savePath = path.resolve(__dirname, '../../../public/uploads/');
+const tmpPath = path.resolve(__dirname, '../../../public/tmp/');
+
+// const savePath = '/app/public/uploads/';
+// const tmpPath = '/app/public/tmp/';
 const http = 'http://';
 module.exports = {
     upload: async (ctx, next) => {
@@ -58,7 +62,7 @@ module.exports = {
                     resolve(files.length);
                 });
             });
-            fs.readdir(path.resolve(__dirname, '../../../public/tmp/'), (err, files) => {
+            fs.readdir(tmpPath, (err, files) => {
                 console.log(err, files);
                 if (err) {
                     resolve(err);

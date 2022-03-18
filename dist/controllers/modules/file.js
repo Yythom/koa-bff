@@ -34,6 +34,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var savePath = _path["default"].resolve(__dirname, '../../../public/uploads/');
 
+var tmpPath = _path["default"].resolve(__dirname, '../../../public/tmp/'); // const savePath = '/app/public/uploads/';
+// const tmpPath = '/app/public/tmp/';
+
+
 var http = 'http://';
 module.exports = {
   upload: function () {
@@ -123,7 +127,7 @@ module.exports = {
                   });
                 });
 
-                _fs["default"].readdir(_path["default"].join(__dirname, '../../../public/tmp/'), function (err, files) {
+                _fs["default"].readdir(tmpPath, function (err, files) {
                   console.log(err, files);
 
                   if (err) {

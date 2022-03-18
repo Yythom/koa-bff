@@ -9,6 +9,8 @@ import {
 import { getIpAddress } from '../../utils/utils';
 import config from '../../config';
 
+const AppInfoParser = require('app-info-parser');
+
 module.exports = {
     upgrade: async (ctx, next) => {
         // 'af77e496e920883de939dc1d7c17fb65.apk'
@@ -20,23 +22,32 @@ module.exports = {
             const element = fileList[index];
             if (element.indexOf('apk') !== -1) apkHashName = element;
         }
-        const filePath = path.join(PUBLIC_DIR, apkHashName); // 合并后的文件写入的位置
+        const filePath = path.resolve(PUBLIC_DIR, apkHashName); // 合并后的文件写入的位置
+        console.log(filePath, 'filePath');
         const DownloadUrl = `${`${http}${getIpAddress()}:${config.PORT}`}/file?url=${encodeURIComponent(apkHashName)}`;
         const is = fs.existsSync(filePath);
         if (is) {
             const apk = new Apk(filePath);
-            const appInfo = await apk.getManifestInfo();
             const { size } = fs.statSync(filePath);
             const buffer = fs.readFileSync(filePath);
             const hash = crypto.createHash('md5');
             hash.update(buffer, 'utf8');
             const md5 = hash.digest('hex');
+
+            console.log(size, 'size');
+            // const appInfo = {};
+            const appInfo = await apk.getManifestInfo();
+            // console.log(appInfo, 'appInfo');
+            // const parser = new AppInfoParser(filePath);
+            // const appInfo = await parser.parse();
+            // console.log(info.);
+
             const initJson = {
                 Code: 0,
                 Msg: '',
                 UpdateStatus: 0,
-                VersionCode: appInfo.versionCode,
-                VersionName: appInfo.versionName,
+                VersionCode: appInfo?.versionCode,
+                VersionName: appInfo?.versionName,
                 UploadTime: ' ',
                 ModifyContent: '',
                 DownloadUrl: '',

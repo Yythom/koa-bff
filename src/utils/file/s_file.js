@@ -6,9 +6,9 @@
 /* eslint-disable no-plusplus */
 import path from 'path';
 
-const TMP_DIR = path.join(__dirname, '../../../public/tmp/');
+const TMP_DIR = path.resolve(__dirname, '../../../public/tmp/');
 const http = 'http://';
-const PUBLIC_DIR = path.join(__dirname, '../../../public/uploads/');
+const PUBLIC_DIR = path.resolve(__dirname, '../../../public/uploads/');
 const DEFAULT_SIZE = 80 * 1024 * 1024;
 
 const olds = '1.8.1';
