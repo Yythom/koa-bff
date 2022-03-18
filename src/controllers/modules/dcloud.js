@@ -1,5 +1,4 @@
 /* eslint-disable no-plusplus */
-import Axios from 'axios';
 import { Apk } from 'node-apk';
 import path from 'path';
 import fs, { WriteStream } from 'fs-extra';
@@ -14,6 +13,7 @@ module.exports = {
     upgrade: async (ctx, next) => {
         // 'af77e496e920883de939dc1d7c17fb65.apk'
         const { code, version } = ctx.request.query;
+        console.log(code, version, '-----');
         const fileList = await fs.readdir(PUBLIC_DIR);
         let apkHashName = '';
         for (let index = 0; index < fileList.length; index++) {

@@ -43,7 +43,6 @@ module.exports = {
         });
         ctx.body = res;
     },
-
     del: async (ctx, next) => {
         const res = await new Promise((resolve, reject) => {
             fs.readdir(savePath, (err, files) => {
@@ -59,7 +58,7 @@ module.exports = {
                     resolve(files.length);
                 });
             });
-            fs.readdir(path.join(__dirname, '../../../public/tmp/'), (err, files) => {
+            fs.readdir(path.resolve(__dirname, '../../../public/tmp/'), (err, files) => {
                 console.log(err, files);
                 if (err) {
                     resolve(err);
