@@ -10,7 +10,7 @@ import remove from '../../utils/file/remove';
 import config from '../../config';
 import { getIpAddress } from '../../utils/utils';
 
-const savePath = path.join(__dirname, '../../../public/uploads/');
+const savePath = path.resolve(__dirname, '../../../public/uploads/');
 const http = 'http://';
 module.exports = {
     upload: async (ctx, next) => {
@@ -58,7 +58,7 @@ module.exports = {
                     resolve(files.length);
                 });
             });
-            fs.readdir(path.join(__dirname, '../../../public/tmp/'), (err, files) => {
+            fs.readdir(path.resolve(__dirname, '../../../public/tmp/'), (err, files) => {
                 console.log(err, files);
                 if (err) {
                     resolve(err);
