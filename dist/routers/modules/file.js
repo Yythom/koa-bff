@@ -1,0 +1,20 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _default = function _default(router, middleware, controller) {
+  // 注册路由
+  router.post('/upload', controller.file.upload);
+  router.post('/osspost', controller.file.osspost);
+  router.post('/del', controller.file.del);
+  router.get('/file', controller.file.get); // 分片
+
+  router.post('/s_upload/:filename/:chunk_name/:start', controller.sfile.s_upload);
+  router.get('/verify/:filename', controller.sfile.verify);
+  router.get('/merge/:filename/:size', controller.sfile.merge);
+};
+
+exports["default"] = _default;

@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import Axios from 'axios';
-import os from 'os';
 import FormData from 'form-data';
 import mime from 'mime-types';
 import stream from 'stream';
@@ -10,13 +9,15 @@ import remove from '../../utils/file/remove';
 import config from '../../config';
 import { getIpAddress } from '../../utils/utils';
 
-const savePath = path.join(__dirname, '../../../public/uploads/');
+const savePath = path.resolve(__dirname, '../../../public/uploads/');
 const http = 'http://';
 module.exports = {
     upload: async (ctx, next) => {
         const { files } = ctx.request;
         if (!files) ctx.body = '上传文件不存在';
-        console.log(files, 'files');
+        // console.log(files, 'files');
+        console.log(savePath, 'savePath');
+        ctx.body = '上传文件不存在';
         const res = await new Promise((resolve) => {
             const filesData = {};
             Object.keys(files).forEach((key, index) => {

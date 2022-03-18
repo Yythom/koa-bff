@@ -3,9 +3,10 @@
   "version": "1.2.1",
   "description": "BFF",
   "scripts": {
-    "start": "npm run build && cross-env NODE_ENV=development node dist/bin/www.js",
+    "listen": "npx cross-env NODE_ENV=development babel-node dist/bin/www.js",
+    "start": "npm run build && cross-env NODE_ENV=development  babel-node dist/bin/www.js",
     "dev": "npx cross-env NODE_ENV=development ./node_modules/.bin/nodemon --exec babel-node src/bin/www.js",
-    "build": "babel src --out-dir dist --ignore src/views/*.pug",
+    "build": "npx babel src --out-dir dist --ignore src/views/*.pug",
     "test": "mocha -t 10000",
     "lint": "eslint .",
     "fix": "eslint --fix .",
