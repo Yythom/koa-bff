@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+const fs = require('fs');
+const path = require('path');
 
 function remove(tarPath, cb) {
     fs.stat(tarPath, (err, states) => {
@@ -28,5 +28,4 @@ function remove(tarPath, cb) {
         }
     });
 }
-
-export default remove;
+module.exports = remove;
